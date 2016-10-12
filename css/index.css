@@ -1,0 +1,41 @@
+body {
+    background: url('../images/vituniversity.png');
+    background-size: cover;
+}
+.border{
+	border: solid 1px red;
+}
+.border-green{
+	border: solid 1px green;
+}
+
+.fb-icon{
+	padding: 1rem;
+}
+.fa-facebook{
+	color: blue;
+	transition: all 0.5s ease;
+}
+.fa-facebook:hover{
+	color: black;
+}
+.fb-like{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 200px;
+}
+.logo-div{
+	margin-top: 35vh;
+}
+.login-div{
+	margin-top: 2vh;
+}
+.logoimg{
+	max-width: 97vw;
+}
+.loginimg{
+	width: 300px;
+	max-width: 96vw;
+}
+

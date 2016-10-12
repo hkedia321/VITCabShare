@@ -1,0 +1,155 @@
+ header, main, footer {
+ 	padding-left: 300px;
+ }
+body{
+	overflow-x: hidden;
+}
+ @media only screen and (max-width : 992px) {
+ 	header, main, footer {
+ 		padding-left: 0;
+ 	}
+ }
+ body{
+	background-color: #f8f8f8;
+}
+nav{
+	background-color: #24857c;
+}
+.navlogo-mobile{
+	width: 120px;
+	margin-top: -0px !important;
+}
+ .nav-background{
+ 	height: 180px;
+ 	width: 100%;
+ 	position: absolute;
+ 	z-index: -1;
+ }
+ .truncate{
+ 	display: inline-block;
+ }
+ .form-error{
+ 	color: red !important;
+ } 
+ .form-success{
+ 	color: green !important;
+ }
+ .nav-profile-pic{
+ 	width: 80px;
+ 	margin-left: auto;
+ 	margin-right: auto;
+ 	text-align: center;
+ 	margin-top: 10px;
+ }
+ .side-nav .details{
+ 	line-height: normal;
+ 	margin-top: 40px;	
+ }
+ .side-nav{
+ 	position: relative;
+ }
+.closebuttonnav{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	color: #fff !important;
+}
+.close-button-nav{
+	color: #fff !important;
+}
+ .userView{
+ 	height: 180px;
+ }
+ .detailsemail{
+ 	color: #eeeeee;
+ }
+ .detailsname{
+ 	font-size: 1.1rem;
+ }
+ #reset{
+ 	background-color: #941810;
+ }
+ .side-nav .waves-effect{
+ 	display: block;
+ }
+ .samedate-intro .chip{
+ 	position: static;
+ 	/*font-size: 1rem !important;*/
+ }
+ span.badge{
+ 	position: static;
+ }
+ .imgdiv img{
+ 	width: 100%;
+ 	border-radius: 50%;
+ }
+ .passenger{
+ 	position: relative;
+ 	padding-top: 1.0rem;
+ }
+ 
+ .requestbutton{
+ 	position: absolute;
+ 	bottom: 10px;
+ 	right: 10px;
+ }
+ .text-light{
+ 	color: #8a8686;
+ }
+.modal
+{
+	width: 450px;
+	max-width: 95%;
+	top: 130%;
+}
+.chipbig{
+	font-size: 1.2rem;
+}
+.optionbutton{
+	/*width: 50%;		
+	text-align: center;*/
+	transition: all 0.5s ease;
+}
+/*.optionbutton:hover{
+	background-color: rgb(38, 166, 154);
+}*/
+.yesoption{
+border-left: solid 0px #000;
+}
+.nooption{
+border-right: solid 0px #000;
+}
+margin-up-little{
+	margin-top: 2rem;
+}
+ @media (min-width: 769px){
+ 	.imgdiv img{
+ 		width: 75%;
+ 	}
+ 	.all-passengers{
+ 		padding-left: 0rem;
+ 		padding-right: 2.4rem;
+ 	}
+ 	.passenger .timediv{
+ 	position: absolute;
+ 	top: 10px;
+ 	right: 10px;
+ }
+  .passenger .placediv{
+ 	position: absolute;
+ 	top: 10px;
+ 	left: 10px;
+ }
+ .passenger{
+ 	padding-top: 2.5rem;
+ }
+ }
+
+ main.showall .passenger .timediv{
+ 	position: absolute;
+ 	top: 10px;
+ 	right: 10px;
+ }
+ main.showall .passenger{
+ 	padding-top: 2.5rem;
+ }
