@@ -22,7 +22,7 @@ require_once('includes/head.php');
 	?>
 	<main>
 		<br><br>
-		<h5 class="samedate-intro" id="heading-introo">You received Requests from following people</h5>
+		<h5 class="samedate-intro thoda-side-mobile" id="heading-introo">You received Requests from following people</h5>
 		<br><br>
 		<div class="container">
 			<div class="all-passengers">
@@ -57,11 +57,11 @@ require_once('includes/head.php');
 								<div class="timediv"><i class="fa fa-calendar-o" aria-hidden="true"></i> <?php echo $traveldate;?> <i class="fa fa-clock-o" aria-hidden="true"></i>
 									<span><?php echo $traveltime;?></span>
 								</div>
-								<div class="imgdiv col s3 center-align">
-									<img src="<?php echo $picture;?>">
+								<div class="imgdiv col s3 center-align valign-wrapper">
+									<img src="<?php echo $picture;?>" class="valign">
 								</div>
 								<div class="detailsdiv col s9">
-									<h6><?php echo $name;?></h6>
+									<h6><b><?php echo $name;?></b></h6>
 									<p>You can contact me at <?php echo $email;?> or <?php echo $phoneno;?></p>
 								</div>
 							</div>

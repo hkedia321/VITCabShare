@@ -22,12 +22,7 @@ require_once('includes/head.php');
 	?>
 	<main class="showall">
 		<br><br>
-		<div class="hide-on-small-only">
-			<h5 class="samedate-intro"></h5>
-		</div>
-		<div class="hide-on-med-and-up">
-			<h5 class="samedate-intro"></h5>
-		</div>
+		<h5 class="samedate-intro" align="center">All travellers</h5>
 		<br><br>
 		<div class="container">
 			<div class="all-passengers">
@@ -59,11 +54,11 @@ require_once('includes/head.php');
 							<div class="timediv"><i class="fa fa-calendar-o" aria-hidden="true"></i> <?php echo $traveldate;?> <i class="fa fa-clock-o" aria-hidden="true"></i>
 								<span><?php echo $traveltime;?></span>
 							</div>
-							<div class="imgdiv col s3 center-align">
-								<img src="<?php echo $picture;?>">
+							<div class="imgdiv col s3 center-align valign-wrapper">
+								<img src="<?php echo $picture;?>"  class="valign">
 							</div>
 							<div class="detailsdiv col s9">
-								<h6><?php echo $name;?></h6>
+								<h6><b><?php echo $name;?></b></h6>
 								<?php 
 								if(($emailvisible=="0"||$emailvisible==0 ) && ($phonenovisible=="0"||$phonenovisible==0))
 								{

@@ -31,7 +31,8 @@ $(".button-collapse").sideNav();
 			var j;
 			for(j=20;j<=24;j++)
 				$("#"+j).removeAttr("disabled");
-			$("#"+i).attr("disabled","true");
+			if(i!=20)
+				$("#"+i).attr("disabled","true");
 			$('select').material_select();
 		});
 	});
@@ -43,7 +44,8 @@ $(".button-collapse").sideNav();
 			var j;
 			for(j=10;j<=14;j++)
 				$("#"+j).removeAttr("disabled");
-			$("#"+i).attr("disabled","true");
+			if(i!=10)
+				$("#"+i).attr("disabled","true");
 			$('select').material_select();
 		});
 	});

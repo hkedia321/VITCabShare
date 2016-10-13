@@ -32,7 +32,7 @@ require_once('includes/head.php');
 		if (!$my_travelfrom or !$my_travelto)
 		{
 			?>
-			<div class="no-travel-intro">You need to <a href="editdetails.php"><span class="chip"><i class="fa fa-pencil" aria-hidden="true"></i> add</span></a> your travel details</div>
+			<div class="no-travel-intro thoda-side-mobile">You need to <a href="editdetails.php"><span class="chip"><i class="fa fa-pencil" aria-hidden="true"></i> add</span></a> your travel details</div>
 			<?php
 		}
 		else
@@ -42,7 +42,7 @@ require_once('includes/head.php');
 				<h5 class="samedate-intro">People travelling on <span class="chip chipbig"><?php echo $my_traveldate;?></span> from <span  class="chip chipbig"><?php echo $my_travelfrom;?></span> to <span  class="chip chipbig"><?php echo $my_travelto;?></span> are:</h5>
 			</div>
 			<div class="hide-on-med-and-up" id="info2">
-				<h5 class="samedate-intro">People travelling on <span class="text-light"><?php echo $my_traveldate;?></span> from <span  class="text-light"><?php echo $my_travelfrom;?></span> to <span  class="text-light"><?php echo $my_travelto;?></span> are:</h5>
+				<h5 class="samedate-intro thoda-side-mobile">People travelling on <span class="text-light"><?php echo $my_traveldate;?></span> from <span  class="text-light"><?php echo $my_travelfrom;?></span> to <span  class="text-light"><?php echo $my_travelto;?></span></h5>
 			</div>
 			<h5 id="info0"></h5>
 			<?php
@@ -85,7 +85,7 @@ require_once('includes/head.php');
 									<img src="<?php echo $picture;?>">
 								</div>
 								<div class="detailsdiv col s9">
-									<h6><?php echo $name;?></h6>
+									<h6><b><?php echo $name;?></b></h6>
 									<?php 
 									if(($emailvisible=="0"||$emailvisible==0 ) && ($phonenovisible=="0"||$phonenovisible==0))
 									{

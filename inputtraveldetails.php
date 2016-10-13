@@ -52,7 +52,7 @@ if(isset($_POST['submit']))
 		if(!$success)
 			header("Location:error.php?inputmobileno");
 		$gUser->update_session();//update session
-		header("Location:sameflight.php");
+		header("Location:showall.php");
 	}
 }
 global $title;
@@ -143,7 +143,7 @@ require_once('includes/head.php');
 					</div>
 					<div class="input-field col s12 m6">
 						<span class="text-light">Date of travel:</span>
-						<input type="date" class="datepicker travelform-elements" class="validate" placeholder="pick a date.." id="traveldate" name="traveldate" value="<?php if(has_presence($traveldate)) echo $traveldate;?>">
+						<input type="text" class="datepicker travelform-elements" class="validate" placeholder="pick a date.." id="traveldate" name="traveldate" value="<?php if(has_presence($traveldate)) echo $traveldate;?>">
 						<label for="date"></label>
 					</div>
 					<div class="input-field col s12 m6">

@@ -116,6 +116,7 @@ nav{
 .yesoption{
 border-left: solid 0px #000;
 }
+
 .nooption{
 border-right: solid 0px #000;
 }
@@ -143,8 +144,13 @@ margin-up-little{
  .passenger{
  	padding-top: 2.5rem;
  }
- }
 
+ }
+@media (max-width: 500px){
+	.thoda-side-mobile{
+	margin-left: 1rem;
+}
+}
  main.showall .passenger .timediv{
  	position: absolute;
  	top: 10px;

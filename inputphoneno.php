@@ -49,6 +49,9 @@ require_once('includes/head.php');
 		margin-left: 0px;
 		margin-right: 0px;
 	}
+	.color-red{
+		color: red;
+	}
 	.text-light{
 		color: #8a8686;
 	}
@@ -71,14 +74,14 @@ require_once('includes/head.php');
 				echo "<h5 class='center-align'>Please enter your mobile number to continue. </h5>
 			<p class='text-light'><i class='fa fa-lock' aria-hidden='true'></i> you can later choose to hide your mobile number from public.</p>";
 			?>
-			
+			<h6 class="center-align color-red" id="error_form"></h6>
 			<div class="input-field col s12">
 				<i class="material-icons prefix">phone</i>
-				<input required name="phoneno" id="phoneno" type="number" length="13">
-				<labeL for="mobileno">Mobile no</labeL>
+				<input required name="phoneno" id="phoneno" type="number" length="13" class="validate">
+				<labeL for="phoneno">Mobile no</labeL>
 			</div>
 			<div class="col s12">
-				<button class="btn waves-effect waves-light center-align" type="submit" name="submit" value="1">Continue<i class="material-icons right">send</i></button>
+				<button class="btn waves-effect waves-light center-align" type="submit" name="submit" value="1" onclick="return check_form();">Continue<i class="material-icons right">send</i></button>
 			</div>
 		</form>
 	</div>
@@ -87,6 +90,17 @@ require_once('includes/head.php');
 <?php 
 include_once('includes/scripts.php');
 ?>
+<script type="text/javascript">
+	function check_form(){
+		var phoneno=$("#phoneno").val();
+		if(phoneno.length<10 || phoneno.length>13)
+		{
+			error="Please enter correct phone no.";
+			$("#error_form").text(error);
+			return false;
+		}
+	}
+</script>
 <?php
 include_once('includes/footer.php');
 ?>
