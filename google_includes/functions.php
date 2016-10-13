@@ -215,6 +215,29 @@ class Users {
 		}
 		return true;
 	}
+
+	function make_seen_all($to_uid){
+		$query="UPDATE requests SET seen=1 WHERE to_uid='{$to_uid}';";
+		
+		$result=mysqli_query($this->connect,$query);
+		if(!$result)
+		{
+			header("Location:error.php?make_seen1");
+			return null;
+		}
+		return true;
+	}
+
+	function all_requests($id){
+		$query="SELECT * FROM requests WHERE to_uid='{$id}' order by r_id desc;";
+		$result=mysqli_query($this->connect,$query);
+		if(!$result)
+		{
+			header("Location:error.php?all_requests");
+			return null;
+		}
+		return $result;
+	}
 }
 
 function has_max_length($value, $max)

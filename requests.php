@@ -5,7 +5,8 @@ $id=$_SESSION['google_data']['id'];
 if(!isset($_SESSION['google_data'])):header("Location:index.php");endif;
 include_once("google_includes/functions.php");
 $gUser=new Users();
-$all_travellers=$gUser->all_travellers_including_me();//returns assoc array
+$all_requests=$gUser->all_requests($id);//returns assoc array
+$gUser->make_seen_all($id);
 ?>
 <?php
 global $title;
@@ -28,28 +29,25 @@ require_once('includes/head.php');
 			<div class="all-passengers">
 				<?php
 				$no_passengers=0;
-				while($row=mysqli_fetch_assoc($all_travellers))
+				while($row=mysqli_fetch_assoc($all_requests))
 				{
-					$oauth_uid=$row['oauth_uid'];
-					$name=$row["fname"]." ".$row["lname"];
-					$email=$row["email"];
-					$picture=$row["picture"];
-					$travelfrom=$row["travelfrom"];
-					$travelto=$row["travelto"];
-					$traveldate=$row["traveldate"];
-					$traveltime=$row["traveltime"];
-					$emailvisible=$row["emailvisible"];
-					$phoneno=$row["phoneno"];
-					$phonenovisible=$row["phonenovisible"];
-					$from_uid=$id;
-					$to_uid=$oauth_uid;
-					$request_already_send=$gUser->check_request($from_uid,$to_uid);
-					$travelfrom=travel_no_words($travelfrom);
-					$travelto=travel_no_words($travelto);
-					if($request_already_send)
+					$from_uid=$row["from_uid"];
+					$row_from=$gUser->find_user($from_uid);
+					$name=$row_from["fname"]." ".$row_from["lname"];
+					$email=$row_from["email"];
+					$picture=$row_from["picture"];
+					$travelfrom=$row_from["travelfrom"];
+					$travelto=$row_from["travelto"];
+					$traveldate=$row_from["traveldate"];
+					$traveltime=$row_from["traveltime"];
+					$emailvisible=$row_from["emailvisible"];
+					$phoneno=$row_from["phoneno"];
+					$phonenovisible=$row_from["phonenovisible"];
+					if(has_presence($travelfrom) and has_presence($travelto))
 					{
+						$travelfrom=travel_no_words($travelfrom);
+						$travelto=travel_no_words($travelto);
 						$no_passengers++;
-						$gUser->make_seen($from_uid,$to_uid);
 						?>
 						<section class="passenger card-panel hoverable">
 							<div class="row">

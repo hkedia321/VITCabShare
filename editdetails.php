@@ -36,7 +36,7 @@ if(isset($_POST['editdetailssubmit']))
 	}
 	if(!has_min_length($phoneno,10) or !has_max_length($phoneno,13))
 	{
-		$form_error="Please enter correct phone no";
+		$form_error="Please enter correct mobile no";
 		$noerrors=1;
 	}
 	if(isset($travelfrom) && !empty($travelfrom))
