@@ -96,7 +96,7 @@ require_once('includes/head.php');
 										<img src="<?php echo $picture;?>">
 									</div>
 									<div class="detailsdiv col s9">
-										<h6><b><?php echo $name;?></b></h6>
+										<h6 class="fontsize14rem"><b><?php echo ucwords($name);?></b></h6>
 										<?php 
 										if(($emailvisible=="0"||$emailvisible==0 ) && ($phonenovisible=="0"||$phonenovisible==0))
 										{

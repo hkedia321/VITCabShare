@@ -18,7 +18,7 @@
      <img class="nav-background" src="images/yellowbg.png">
 
      <div class="center-align"><a href="editdetails.php"><img class="circle nav-profile-pic" src="<?php echo $picture;?>"></a></div>
-     <a href="editdetails.php" class="details"><span class="white-text name"><span class="detailsname truncate"><?php echo $name;?></span><br><br><span class="detailsemail"><?php echo $email;?></span> </span></a>
+     <a href="editdetails.php" class="details"><span class="white-text name"><span class="detailsname truncate"><?php echo ucwords($name);?></span><br><br><span class="detailsemail"><?php echo $email;?></span> </span></a>
 
    </div>
  </li>

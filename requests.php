@@ -59,7 +59,7 @@ require_once('includes/head.php');
 									<img src="<?php echo $picture;?>" class="valign">
 								</div>
 								<div class="detailsdiv col s9">
-									<h6><b><?php echo $name;?></b></h6>
+									<h6 class="fontsize14rem"><b><?php echo ucwords($name);?></b></h6>
 									<p>You can contact me at <?php echo $email;?> or <?php echo $phoneno;?></p>
 								</div>
 							</div>

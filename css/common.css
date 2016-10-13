@@ -28,6 +28,9 @@ nav{
  .truncate{
  	display: inline-block;
  }
+ .fontsize14rem{
+ 	font-size: 1.4rem;
+ }
  .form-error{
  	color: red !important;
  } 
