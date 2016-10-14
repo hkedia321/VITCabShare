@@ -2,7 +2,11 @@
 session_start();
 if(!isset($_SESSION['google_data'])):header("Location:index.php");endif;
 include_once("google_includes/functions.php");
-
+$gUser=new Users();
+if($gUser->has_phoneno($oauth_uid))
+{
+	header("Location:showall.php");
+}
 $form_error=null;
 if(isset($_POST['submit']))
 {
@@ -10,7 +14,6 @@ if(isset($_POST['submit']))
 	if(!isset($phoneno) or empty($phoneno) or !has_min_length($phoneno,10) or !has_max_length($phoneno,13))
 		$form_error="Please enter your correct phone no";
 	if(!has_presence($form_error)){
-		$gUser = new Users();
 		$oauth_uid=$_SESSION['google_data']['id'];
 		$success=$gUser->update_phoneno($oauth_uid,$phoneno);
 		if(!$success)

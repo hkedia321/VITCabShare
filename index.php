@@ -1,7 +1,16 @@
 <?php
 include_once("config.php");
 include_once("google_includes/functions.php");
-
+session_start();
+$gUser=new Users();
+if(isset($_SESSION['google_data']) and isset($_SESSION['google_data']['id']) and ($gUser->has_phoneno($_SESSION['google_data']['id'])))
+{
+	redirect_to("showall.php");
+}
+if(isset($_SESSION['google_data']) and isset($_SESSION['google_data']['id']))
+{
+	redirect_to("inputphoneno.php");
+}
 
 //print_r($_GET);die;
 
@@ -24,8 +33,8 @@ if ($gClient->getAccessToken()) {
 	$row_user=$gUser->find_user($userProfile['id']);
 	if(!$row_user)
 		header("location: error.php");
-	$_SESSION['google_data']['fname']=$row_user['fname'];
-	$_SESSION['google_data']['lname']=$row_user['lname'];
+	$_SESSION['google_data']['fname']=ucfirst($row_user['fname']);
+	$_SESSION['google_data']['lname']=ucfirst($row_user['lname']);
 	$_SESSION['google_data']['email']=$row_user['email'];
 	$_SESSION['google_data']['picture']=$row_user['picture'];
 	$_SESSION['google_data']['travelfrom']=$row_user['travelfrom'];
@@ -33,11 +42,13 @@ if ($gClient->getAccessToken()) {
 	$_SESSION['google_data']['traveldate']=$row_user['traveldate'];
 	$_SESSION['google_data']['traveltime']=$row_user['traveltime'];
 	$_SESSION['google_data']['flightno']=$row_user['flightno'];
+	$_SESSION['google_data']['lnamevisible']=$row_user['lnamevisible'];
 	$_SESSION['google_data']['emailvisible']=$row_user['emailvisible'];
 	$_SESSION['google_data']['phoneno']=$row_user['phoneno'];
 	$_SESSION['google_data']['phonenovisible']=$row_user['phonenovisible'];
-	header("location: account.php");
 	$_SESSION['token'] = $gClient->getAccessToken();
+	header("location: account.php");
+	
 } else {
 	$authUrl = $gClient->createAuthUrl();
 }

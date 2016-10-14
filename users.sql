@@ -16,6 +16,7 @@ CREATE TABLE `users` (
  	`traveldate` varchar(30),
  	`traveltime` varchar(30),
  	`flightno` varchar(30),
+ 	`lnamevisible` int(1) DEFAULT 1,
  	`emailvisible` int(1) DEFAULT 1,
  	`phoneno` varchar(15),
  	`phonenovisible` int(1) DEFAULT 1,

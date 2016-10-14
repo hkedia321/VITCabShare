@@ -5,6 +5,7 @@ $id=$_SESSION['google_data']['id'];
 if(!isset($_SESSION['google_data'])):header("Location:index.php");endif;
 include_once("google_includes/functions.php");
 $gUser=new Users();
+if($gUser->has_phoneno($_SESSION['google_data']['id'])); else{header("Location:inputphoneno.php");}
 $all_travellers=$gUser->all_travellers_including_me();//returns assoc array
 ?>
 <?php
@@ -32,7 +33,10 @@ require_once('includes/head.php');
 				{
 					$no_passengers++;
 					$oauth_uid=$row['oauth_uid'];
-					$name=$row["fname"]." ".$row["lname"];
+					$lnamee=$row_from["lname"];
+					if(!$row_from["lnamevisible"])
+						$lnamee="";
+					$name=$row["fname"]." ".$lnamee;
 					$email=$row["email"];
 					$picture=$row["picture"];
 					$travelfrom=$row["travelfrom"];
@@ -58,7 +62,7 @@ require_once('includes/head.php');
 								<img src="<?php echo $picture;?>"  class="valign">
 							</div>
 							<div class="detailsdiv col s9">
-								<h6 class="fontsize14rem"><b><?php echo ucwords($name);?></b></h6>
+								<h6 class="fontsize14rem"><b><?php echo ucwords(strtolower($name));?></b></h6>
 								<?php 
 								if(($emailvisible=="0"||$emailvisible==0 ) && ($phonenovisible=="0"||$phonenovisible==0))
 								{
@@ -73,7 +77,7 @@ require_once('includes/head.php');
 									<?php
 								}
 								?>
-								<a class="requestbutton waves-effect waves-light btn right <?php if($request_already_send){echo 'disabled';} else{echo 'modal-trigger';}?>" name="<?php echo $name?>" id="<?php echo $oauth_uid;?>" <?php if(!$request_already_send){echo "href='#modal1'";}?> ><i class="fa fa-envelope-o" aria-hidden="true"></i> <?php if($request_already_send){echo 'send';} else{echo 'send request';}?></a>
+								<a class="requestbutton waves-effect waves-light btn right <?php if($request_already_send){echo 'disabled';} else{echo 'modal-trigger';}?>" name="<?php echo $name?>" id="<?php echo $oauth_uid;?>" onclick="return check_valid_request(this)" <?php if(!$request_already_send){echo "href='#modal1'";}?> ><i class="fa fa-envelope-o" aria-hidden="true"></i> <?php if($request_already_send){echo 'send';} else{echo 'send request';}?></a>
 							</div>
 						</div>
 					</section>
@@ -88,7 +92,7 @@ require_once('includes/head.php');
 				<!-- Modal Structure -->
 				<div id="modal1" class="modal">
 					<div class="modal-content">
-						<h5>Send a request to <i><span id="receive_name_span"></span></i> for sharing cab?</h5>
+						<h5>Send a request to <span id="receive_name_span"></span> for sharing cab?</h5>
 						<p><i>Note</i> : The person you send the request, will be able to see your email and phone number to contact you back.</p>
 						
 					</div>
@@ -109,6 +113,13 @@ require_once('includes/head.php');
 	include_once('includes/scripts.php');
 	?>
 	<script type="text/javascript">
+		function check_valid_request(obj){
+			if(this.id=="<?php echo $id;?>")
+			{
+				alert("You cannot send request to yourself!");
+				return false;
+			}
+		}
 		$(".requestbutton").click(function(){
 			var idd=this.id;
 			$("#sendrequest_receive").val(idd);

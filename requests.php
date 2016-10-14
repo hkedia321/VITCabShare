@@ -5,6 +5,7 @@ $id=$_SESSION['google_data']['id'];
 if(!isset($_SESSION['google_data'])):header("Location:index.php");endif;
 include_once("google_includes/functions.php");
 $gUser=new Users();
+if($gUser->has_phoneno($_SESSION['google_data']['id'])); else{header("Location:inputphoneno.php");}
 $all_requests=$gUser->all_requests($id);//returns assoc array
 $gUser->make_seen_all($id);
 ?>
@@ -33,7 +34,10 @@ require_once('includes/head.php');
 				{
 					$from_uid=$row["from_uid"];
 					$row_from=$gUser->find_user($from_uid);
-					$name=$row_from["fname"]." ".$row_from["lname"];
+					$lnamee=$row_from["lname"];
+					if(!$row_from["lnamevisible"])
+						$lnamee="";
+					$name=$row_from["fname"]." ".$lnamee;
 					$email=$row_from["email"];
 					$picture=$row_from["picture"];
 					$travelfrom=$row_from["travelfrom"];
@@ -59,7 +63,7 @@ require_once('includes/head.php');
 									<img src="<?php echo $picture;?>" class="valign">
 								</div>
 								<div class="detailsdiv col s9">
-									<h6 class="fontsize14rem"><b><?php echo ucwords($name);?></b></h6>
+									<h6 class="fontsize14rem"><b><?php echo ucwords(strtolower($name));?></b></h6>
 									<p>You can contact me at <?php echo $email;?> or <?php echo $phoneno;?></p>
 								</div>
 							</div>

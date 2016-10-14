@@ -5,7 +5,8 @@ $id=$_SESSION['google_data']['id'];
 $email=$_SESSION['google_data']['email'];
 if(!isset($_SESSION['google_data'])):header("Location:index.php");endif;
 include_once("google_includes/functions.php");
-
+$gUser=new Users();
+if($gUser->has_phoneno($_SESSION['google_data']['id'])); else{header("Location:inputphoneno.php");}
 if(isset($_POST['editdetailssubmit']))
 {
 	// header("Location:http://google.com");
@@ -17,6 +18,7 @@ if(isset($_POST['editdetailssubmit']))
 	$traveldate=($_POST['traveldate']);
 	$traveltime=$_POST['traveltime'];
 	$flightno=($_POST['flightno']);
+	$lnamevisible=$_POST['seelname'];
 	$emailvisible=$_POST['seeemail'];
 	if(isset($emailvisible) && $emailvisible=="1");
 	else
@@ -26,22 +28,13 @@ if(isset($_POST['editdetailssubmit']))
 	if(isset($phonenovisible) && $phonenovisible=="1");
 	else
 		$phonenovisible="0";
-	if(!isset($phoneno) or empty($phoneno)){
-		$form_error="Phone no can't be blank";
-		$noerrors=1;
-	}
 	if(!has_max_length($flightno,20)){
 		$form_error="flight no max length is 20 characters";
 		$noerrors=1;
 	}
-	if(!has_min_length($phoneno,10) or !has_max_length($phoneno,13))
-	{
-		$form_error="Please enter correct mobile no";
-		$noerrors=1;
-	}
 	if(isset($travelfrom) && !empty($travelfrom))
 	{
-		if(!has_presence($travelto) or !has_presence($traveldate) or !has_presence($traveltime) )
+		if(!has_presence($travelto) or !has_presence($traveldate) or !has_presence($traveltime))
 		{
 			$form_error="Please enter complete travel details or leave it fully blank";
 			$noerrors=1;
@@ -49,8 +42,7 @@ if(isset($_POST['editdetailssubmit']))
 	}
 	if($noerrors==0)
 	{
-		$gUser=new Users();
-		$success=$gUser->update_details($id,$travelfrom,$travelto,$traveldate,$traveltime,$flightno,$emailvisible,$phoneno,$phonenovisible);
+		$success=$gUser->update_details($id,$travelfrom,$travelto,$traveldate,$traveltime,$flightno,$lnamevisible,$emailvisible,$phonenovisible);
 		if(!$success)
 		{
 			$form_error="Some error occured. Please try again later";
@@ -68,6 +60,7 @@ $google_travelto=$_SESSION['google_data']['travelto'];
 $google_traveldate=$_SESSION['google_data']['traveldate'];
 $google_traveltime=$_SESSION['google_data']['traveltime'];
 $google_flightno=$_SESSION['google_data']['flightno'];
+$google_lnamevisible=$_SESSION['google_data']['lnamevisible'];
 $google_emailvisible=$_SESSION['google_data']['emailvisible'];
 $google_phoneno=$_SESSION['google_data']['phoneno'];
 $google_phonenovisible=$_SESSION['google_data']['phonenovisible'];
@@ -132,9 +125,22 @@ require_once('includes/head.php');
 				</div>
 				<h5 class="margin-up-little">Personal details:</h5>
 				<div class="row">
+					<div class="col s12">
+						Show my last name(<span class="text-light"><?php echo $_SESSION['google_data']['lname'];?></span>) to others&nbsp;
+						<span class="switch">
+							<label>
+								No
+								<input type="checkbox" name="seelname" id="seelname" value="1" <?php if(has_presence($google_lnamevisible) and $google_lnamevisible=="1") echo " checked"?> >
+								<span class="lever"></span>
+								Yes
+							</label>
+						</span>
+					</div>
+				</div>
+				<div class="row">
 					<div class="input-field col s12">
 						<i class="material-icons prefix">email</i>
-						<input disabled title="you cannot change your email id since it is received from your google account !!" name="email" id="email" type="email" class="validate" data-error="wrongemail" data-success=""<?php echo " value='{$email}'"?> >
+						<input disabled title="you cannot change your email id !" name="email" id="email" type="email" class="validate" data-error="wrongemail" data-success=""<?php echo " value='{$email}'"?> >
 						<labeL for="email">Email</labeL>
 					</div>
 					<div class="col s12">
@@ -152,7 +158,7 @@ require_once('includes/head.php');
 				<div class="row">
 					<div class="input-field col s12">
 						<i class="material-icons prefix">phone</i>
-						<input name="phoneno" id="phoneno" type="number" length="13"<?php if(has_presence($google_phoneno)) echo " value={$google_phoneno}"?>>
+						<input disabled name="phoneno" id="phoneno" type="number" title="You cannot change your phone no !" length="13"<?php if(has_presence($google_phoneno)) echo " value='{$google_phoneno}'"?>>
 						<labeL for="phoneno">Mobile no</labeL>
 					</div>
 					<div class="col s12">
@@ -216,13 +222,7 @@ include_once('includes/scripts.php');
 		return false;
 	}
 	function check_valid(){
-		if(document.getElementById("latercheck").checked)
-		{
-			$("#errordisplay").text("");
-			return true;
-		}
-		else
-			$("#errordisplay").text(error);
+		return true;
 		var error="";
 		var travelfrom=$("#from").val();
 		var travelto=$("#to").val();

@@ -5,6 +5,8 @@ $id=$_SESSION['google_data']['id'];
 $email=$_SESSION['google_data']['email'];
 if(!isset($_SESSION['google_data'])):header("Location:index.php");endif;
 include_once("google_includes/functions.php");
+$gUser=new Users();
+if($gUser->has_phoneno($_SESSION['google_data']['id'])); else{header("Location:inputphoneno.php");}
 $my_traveldate=$_SESSION['google_data']['traveldate'];
 $my_traveltime=$_SESSION['google_data']['traveltime'];
 $my_travelfrom=$_SESSION['google_data']['travelfrom'];
@@ -12,7 +14,6 @@ $my_travelfrom=travel_no_words($my_travelfrom);
 $my_travelto=$_SESSION['google_data']['travelto'];
 $my_travelto=travel_no_words($my_travelto);
 $my_flightno=$_SESSION['google_data']['flightno'];
-$gUser=new Users();
 $all_travellers=$gUser->all_travellers_ordertime();//returns assoc array
 ?>
 <?php
@@ -66,7 +67,10 @@ require_once('includes/head.php');
 					while($row=mysqli_fetch_assoc($all_travellers))
 					{
 						$oauth_uid=$row['oauth_uid'];
-						$name=$row["fname"]." ".$row["lname"];
+						$lnamee=$row_from["lname"];
+						if(!$row_from["lnamevisible"])
+							$lnamee="";
+						$name=$row["fname"]." ".$lnamee;
 						$email=$row["email"];
 						$picture=$row["picture"];
 						$travelfrom=$row["travelfrom"];
@@ -124,7 +128,7 @@ require_once('includes/head.php');
 				<!-- Modal Structure -->
 				<div id="modal1" class="modal">
 					<div class="modal-content">
-						<h5>Send a request to <i><span id="receive_name_span"></span></i> for sharing cab?</h5>
+						<h5>Send a request to <span id="receive_name_span"></span> for sharing cab?</h5>
 						<p><i>Note</i> : The person you send the request, will be able to see your email and phone number to contact you back.</p>
 						
 					</div>

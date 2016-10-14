@@ -2,14 +2,17 @@
  session_start();
  global $active_nav;
  $id=$_SESSION['google_data']['id'];
- $name=$_SESSION['google_data']['name'];
- $email=$_SESSION['google_data']['email'];
- $picture=$_SESSION['google_data']['picture'];
- $to_uid=$id;
- $gUser=new Users();
- $no_unseen_requests=$gUser->no_unseen_requests($to_uid);
- ?>
- <ul id="slide-out" class="side-nav fixed">
+ $lnamee=$_SESSION['google_data']['lname'];
+ if(!$_SESSION['google_data']["lnamevisible"])
+  $lnamee="";
+$name=$_SESSION['google_data']["fname"]." ".$lnamee;
+$email=$_SESSION['google_data']['email'];
+$picture=$_SESSION['google_data']['picture'];
+$to_uid=$id;
+$gUser=new Users();
+$no_unseen_requests=$gUser->no_unseen_requests($to_uid);
+?>
+<ul id="slide-out" class="side-nav fixed">
   <div class="hide-on-large-only closebuttonnav">
     <a href="#" class="close-button-nav"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
   </div>  
@@ -18,7 +21,7 @@
      <img class="nav-background" src="images/yellowbg.png">
 
      <div class="center-align"><a href="editdetails.php"><img class="circle nav-profile-pic" src="<?php echo $picture;?>"></a></div>
-     <a href="editdetails.php" class="details"><span class="white-text name"><span class="detailsname truncate"><?php echo ucwords($name);?></span><br><br><span class="detailsemail"><?php echo $email;?></span> </span></a>
+     <a href="editdetails.php" class="details center-align"><span class="white-text name"><span class="detailsname truncate"><?php echo ucwords(strtolower($name));?></span><br><br><span class="detailsemail"><?php echo $email;?></span> </span></a>
 
    </div>
  </li>

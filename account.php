@@ -5,7 +5,9 @@ if(!isset($_SESSION['google_data'])):header("Location:index.php");endif;
 $gUser = new Users();
 	$oauth_uid=$_SESSION['google_data']['id'];
 if($gUser->has_phoneno($oauth_uid))
+{
 	header("Location:showall.php");
+}
 else
 	header("Location:inputphoneno.php");
 ?>

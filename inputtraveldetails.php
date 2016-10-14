@@ -1,13 +1,16 @@
 <?php
 session_start();
 if(!isset($_SESSION['google_data'])):header("Location:index.php");endif;
+include_once("google_includes/functions.php");
+$gUser=new Users();
+if($gUser->has_phoneno($_SESSION['google_data']['id'])); else{header("Location:inputphoneno.php");}
 $form_error=null;
 $travelfrom=null;
 $travelto=null;
 $traveldate=null;
 $traveltime=null;
 $flightno=null;
-include_once("google_includes/functions.php");
+
 if(isset($_POST['submit']))
 {
 	$latercheck=$_POST['latercheck'];
@@ -16,7 +19,6 @@ if(isset($_POST['submit']))
 	$traveldate=$_POST['traveldate'];
 	$traveltime=$_POST['traveltime'];
 	$flightno=$_POST['flightno'];
-	$gUser = new Users();
 	$oauth_uid=$_SESSION['google_data']['id'];
 	$latercheck=$_POST['latercheck'];
 	if(has_presence($latercheck) and $latercheck=="on");
@@ -50,7 +52,7 @@ if(isset($_POST['submit']))
 	if(!has_presence($form_error)){
 		$success=$gUser->update_traveldetails($oauth_uid,$travelfrom,$travelto,$traveldate,$traveltime,$flightno);
 		if(!$success)
-			header("Location:error.php?inputmobileno");
+			header("Location:error.php?inputphoneno");
 		$gUser->update_session();//update session
 		header("Location:showall.php");
 	}

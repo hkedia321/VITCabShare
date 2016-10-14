@@ -4,6 +4,7 @@ class Users {
 	
 	function __construct(){
 		//database configuration
+		//######## this is the only place you have to change database details #######
 		$dbServer = 'mysql.hostinger.in'; //Define database server host
 		$dbUsername = 'u156415601_vit'; //Define database username
 		$dbPassword = 'secret'; //Define database password
@@ -93,12 +94,13 @@ class Users {
 		$_SESSION['google_data']['traveldate']=$row['traveldate'];
 		$_SESSION['google_data']['traveltime']=$row['traveltime'];
 		$_SESSION['google_data']['flightno']=$row['flightno'];
+		$_SESSION['google_data']['lnamevisible']=$row['lnamevisible'];
 		$_SESSION['google_data']['emailvisible']=$row['emailvisible'];
 		$_SESSION['google_data']['phoneno']=$row['phoneno'];
 		$_SESSION['google_data']['phonenovisible']=$row['phonenovisible'];
 
 	}
-	function update_details($id,$travelfrom,$travelto,$traveldate,$traveltime,$flightno,$emailvisible,$phoneno,$phonenovisible)
+	function update_details($id,$travelfrom,$travelto,$traveldate,$traveltime,$flightno,$lnamevisible,$emailvisible,$phonenovisible)
 	{
 		session_start();
 		if(!has_presence($travelfrom))
@@ -111,12 +113,14 @@ class Users {
 			$traveltime=0;
 		if(!has_presence($flightno))
 			$flightno=0;
+		if(!has_presence($lnamevisible))
+			$lnamevisible=0;
 		if(!has_presence($emailvisible))
 			$emailvisible=0;
 		if(!has_presence($phonenovisible))
 			$phonenovisible=0;
 
-		$query="UPDATE users SET travelfrom='{$travelfrom}', travelto='{$travelto}', traveldate='{$traveldate}', traveltime='{$traveltime}', flightno='{$flightno}', emailvisible={$emailvisible}, phoneno='{$phoneno}', phonenovisible={$phonenovisible} WHERE oauth_uid = '{$id}';";
+		$query="UPDATE users SET travelfrom='{$travelfrom}', travelto='{$travelto}', traveldate='{$traveldate}', traveltime='{$traveltime}', flightno='{$flightno}', lnamevisible={$lnamevisible}, emailvisible={$emailvisible}, phonenovisible={$phonenovisible} WHERE oauth_uid = '{$id}';";
 		$result=mysqli_query($this->connect,$query);
 		$_SESSION['myquery']=$query;
 		// echo $query;
@@ -127,7 +131,7 @@ class Users {
 		return true;
 	}
 	function all_travellers_including_me(){
-		$query="SELECT oauth_uid,fname,lname,email,picture,travelfrom,travelto,traveldate,traveltime,flightno,emailvisible,phoneno,phonenovisible FROM users Where travelfrom='1' or travelfrom='2' or travelfrom='3' or travelfrom='4' order by travelfrom,travelto,traveldate,traveltime;";
+		$query="SELECT oauth_uid,fname,lname,email,picture,travelfrom,travelto,traveldate,traveltime,flightno,emailvisible,phoneno,phonenovisible FROM users Where travelfrom='1' or travelfrom='2' or travelfrom='3' or travelfrom='4' order by traveldate,traveltime,travelfrom,travelto,fname,lname;";
 		$result=mysqli_query($this->connect,$query);
 		if(!$result)
 		{
@@ -140,7 +144,7 @@ class Users {
 		//exclude me
 		session_start();
 		$id=$_SESSION['google_data']['id'];
-		$query="SELECT oauth_uid,fname,lname,email,picture,travelfrom,travelto,traveldate,traveltime,flightno,emailvisible,phoneno,phonenovisible FROM users Where oauth_uid!='{$id}' and (travelfrom='1' or travelfrom='2' or travelfrom='3' or travelfrom='4') order by travelfrom,travelto,traveldate,traveltime;";
+		$query="SELECT oauth_uid,fname,lname,email,picture,travelfrom,travelto,traveldate,traveltime,flightno,emailvisible,phoneno,phonenovisible FROM users Where oauth_uid!='{$id}' and (travelfrom='1' or travelfrom='2' or travelfrom='3' or travelfrom='4') order by traveldate,traveltime,travelfrom,travelto,fname,lname;";
 		// echo $query;
 		// die();
 		$result=mysqli_query($this->connect,$query);
@@ -154,7 +158,7 @@ class Users {
 	function all_travellers_ordertime(){
 		session_start();
 		$id=$_SESSION['google_data']['id'];
-		$query="SELECT oauth_uid,fname,lname,email,picture,travelfrom,travelto,traveldate,traveltime,flightno,emailvisible,phoneno,phonenovisible FROM users Where oauth_uid!='{$id}' and (travelfrom='1' or travelfrom='2' or travelfrom='3' or travelfrom='4') order by traveltime;";
+		$query="SELECT oauth_uid,fname,lname,email,picture,travelfrom,travelto,traveldate,traveltime,flightno,emailvisible,phoneno,phonenovisible FROM users Where oauth_uid!='{$id}' and (travelfrom='1' or travelfrom='2' or travelfrom='3' or travelfrom='4') order by traveldate,traveltime;";
 		$result=mysqli_query($this->connect,$query);
 		if(!$result)
 		{
@@ -239,7 +243,10 @@ class Users {
 		return $result;
 	}
 }
-
+function redirect_to($stt){
+	header("Location:{$stt}");
+	die();
+}
 function has_max_length($value, $max)
 {
 	return strlen($value)<=$max;

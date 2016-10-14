@@ -19,7 +19,7 @@ if(!isset($title) or empty($title))
     <title><?php echo $title?></title>
     <meta name="description" content="VIT Cab Share lets you share your cab between VIT-Vellore and Chennai or Bangalore Airport. Save money and make new friends on the way!" />
     <meta name="keywords" content="VIT,Cab,Share,Taxi,Airport,Vellore,rent,vit university,vit cab share,harshit kedia, ACM">
-    <meta name="author" content="harshit kedia">
+    <meta name="author" content="Harshit kedia">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="VIT Cab Share" />
