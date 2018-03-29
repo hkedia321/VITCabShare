@@ -12,8 +12,6 @@ if(isset($_SESSION['google_data']) and isset($_SESSION['google_data']['id']))
 	redirect_to("inputphoneno.php");
 }
 
-//print_r($_GET);die;
-
 if(isset($_REQUEST['code'])){
 	$gClient->authenticate();
 	$_SESSION['token'] = $gClient->getAccessToken();
