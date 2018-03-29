@@ -7,7 +7,6 @@ $clientId = '255740797537-i125ot2r3kvu8vhm5hh48lhb5tct0iur.apps.googleuserconten
 $clientSecret = 'UYZ8sXfZGpEMQT6g07AelZIh'; //Google CLIENT SECRET
 $redirectUrl = 'http://vitcabshare.16mb.com';  //return url (url to script)
 $homeUrl = 'http://vitcabshare.16mb.com';  //return to home
-
 ##################################
 
 $gClient = new Google_Client();
